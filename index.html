@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090a0f" />
+    <title>NOCTURNE — Image Intelligence Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <div class="ambient ambient--one"></div>
+    <div class="ambient ambient--two"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Nocturne home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span>NOCTURNE</span>
+      </a>
+      <nav class="topnav" aria-label="Primary navigation">
+        <a class="active" href="#studio">Studio</a>
+        <a href="#archive">Archive <span class="nav-count">12</span></a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="top-actions">
+        <span class="status-dot"></span>
+        <span class="status-copy">Engine online</span>
+        <button class="icon-button" id="themeButton" aria-label="Toggle accent mode">◐</button>
+      </div>
+    </header>
+
+    <main id="studio" class="shell">
+      <section class="intro">
+        <div>
+          <p class="eyebrow"><span>01</span> IMAGE INTELLIGENCE STUDIO</p>
+          <h1>Make the<br /><em>impossible</em> visible.</h1>
+        </div>
+        <div class="intro-note">
+          <span class="line"></span>
+          <p>A quiet place for loud ideas.<br />Describe a world. We’ll render it.</p>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Image generation workspace">
+        <aside class="control-panel">
+          <div class="panel-heading">
+            <span class="eyebrow">PROMPT CONSOLE</span>
+            <span class="mono">v.2.4</span>
+          </div>
+
+          <label class="field-label" for="prompt">Your vision</label>
+          <div class="prompt-wrap">
+            <textarea id="prompt" rows="6" placeholder="A brutalist observatory floating above an ocean of clouds...">A brutalist observatory floating above an ocean of clouds, first light, cinematic still</textarea>
+            <span class="prompt-counter" id="promptCounter">82 / 500</span>
+          </div>
+
+          <div class="field-block">
+            <div class="field-label-row">
+              <span class="field-label">Atmosphere</span>
+              <span class="mono" id="moodValue">Nocturnal</span>
+            </div>
+            <div class="chip-row" id="moodChips">
+              <button class="chip active" data-mood="Nocturnal">Nocturnal</button>
+              <button class="chip" data-mood="Ethereal">Ethereal</button>
+              <button class="chip" data-mood="Tactile">Tactile</button>
+              <button class="chip" data-mood="Solar">Solar</button>
+            </div>
+          </div>
+
+          <div class="field-block">
+            <div class="field-label-row">
+              <span class="field-label">Aspect ratio</span>
+              <span class="mono" id="ratioValue">16 : 10</span>
+            </div>
+            <div class="ratio-grid" id="ratioGrid">
+              <button class="ratio active" data-ratio="16 : 10"><span>▰</span><small>Wide</small></button>
+              <button class="ratio" data-ratio="1 : 1"><span>□</span><small>Square</small></button>
+              <button class="ratio" data-ratio="4 : 5"><span>▯</span><small>Portrait</small></button>
+              <button class="ratio" data-ratio="9 : 16"><span>▯</span><small>Story</small></button>
+            </div>
+          </div>
+
+          <div class="field-block">
+            <div class="field-label-row">
+              <span class="field-label">Detail level</span>
+              <span class="mono" id="detailValue">78%</span>
+            </div>
+            <input id="detailRange" type="range" min="0" max="100" value="78" />
+            <div class="range-scale"><span>Dreamy</span><span>Precise</span></div>
+          </div>
+
+          <button class="generate-button" id="generateButton">
+            <span class="button-icon">✦</span>
+            <span>Generate vision</span>
+            <span class="button-arrow">↗</span>
+          </button>
+          <p class="shortcut">Press <kbd>⌘</kbd><kbd>↵</kbd> to generate</p>
+        </aside>
+
+        <div class="canvas-panel">
+          <div class="canvas-toolbar">
+            <span class="eyebrow">LIVE CANVAS</span>
+            <div class="canvas-actions">
+              <button class="text-button" id="randomButton">↻ Randomize</button>
+              <button class="text-button" id="downloadButton">↓ Export</button>
+            </div>
+          </div>
+          <div class="canvas" id="canvas">
+            <div class="canvas-grid"></div>
+            <div class="coordinates mono"><span>42° 21' 18.0" N</span><span>71° 03' 37.2" W</span></div>
+            <div class="canvas-placeholder" id="canvasPlaceholder">
+              <div class="orb"><span></span></div>
+              <p>Awaiting your direction</p>
+              <span class="mono">THE VOID IS A CANVAS</span>
+            </div>
+            <img id="resultImage" class="result-image" alt="Generated artwork" />
+            <div class="canvas-meta"><span id="renderState">READY TO RENDER</span><span class="mono">1024 × 640</span></div>
+            <div class="scanline"></div>
+          </div>
+          <div class="canvas-caption">
+            <span>01 / 01</span>
+            <span id="captionText">The first light has yet to break.</span>
+            <span class="mono">NOCTURNE ENGINE</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="archive-section" id="archive">
+        <div class="section-heading">
+          <div><p class="eyebrow"><span>02</span> RECENT VISIONS</p><h2>Fragments from<br /><em>the archive.</em></h2></div>
+          <button class="text-button" id="clearArchive">Clear archive ↗</button>
+        </div>
+        <div class="archive-grid" id="archiveGrid">
+          <article class="archive-card featured"><div class="archive-image image-one"><span class="archive-tag">01 — GENERATED</span></div><div class="archive-card-info"><span>Celestial brutalism</span><span class="mono">2m ago</span></div></article>
+          <article class="archive-card"><div class="archive-image image-two"><span class="archive-tag">02 — GENERATED</span></div><div class="archive-card-info"><span>After the rain</span><span class="mono">18m ago</span></div></article>
+          <article class="archive-card"><div class="archive-image image-three"><span class="archive-tag">03 — GENERATED</span></div><div class="archive-card-info"><span>Soft machinery</span><span class="mono">41m ago</span></div></article>
+        </div>
+      </section>
+    </main>
+
+    <footer id="about"><span>© 2025 NOCTURNE STUDIO</span><span>CRAFTED FOR THE CURIOUS</span><span class="mono">∞ / 001</span></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
